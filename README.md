@@ -1,4 +1,4 @@
-# GoStack10 - Bootcamp - (:rocket:seat)
+# GoStack10 - Bootcamp - ([:rocket:seat](https://rocketseat.com.br))
 
 
 ### :a:guarde mais informações nos proximos commit :heart: 
