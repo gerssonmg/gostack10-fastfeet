@@ -14,7 +14,7 @@ class UserController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validatasion fails' });
+      return res.status(400).json({ error: 'Validataion fails' });
     }
 
     const userExists = await User.findOne({
@@ -75,6 +75,13 @@ class UserController {
       email,
       provider,
     });
+  }
+
+  async indexAdmin(req, res) {
+    // Atributt adicionado pelo middlewares/auth.js caso o token seja valido
+    const { userId } = req;
+    const user = await User.findByPk(userId);
+    return user.email === 'admin@fastfeet.com';
   }
 }
 
