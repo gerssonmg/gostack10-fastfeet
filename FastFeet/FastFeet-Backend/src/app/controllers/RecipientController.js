@@ -46,6 +46,21 @@ class RecipientController {
       return res.status(400).json({ error: 'User not Admin' });
     }
 
+    const schema = Yup.object().shape({
+      name: Yup.string().min(1, 'name'),
+      bairro: Yup.string().min(1, 'bairro'),
+      rua: Yup.string().min(1),
+      numero: Yup.number().positive(),
+      estado: Yup.string().min(1),
+      cidade: Yup.string().min(1),
+    });
+
+    try {
+      await schema.validate(req.body);
+    } catch (err) {
+      return res.status(400).json({ error: `Validation fails: ${err}` });
+    }
+
     const recipient = await Recipient.findByPk(req.params.id);
     if (!recipient) {
       return res.status(400).json({ error: 'Id not found.' });
