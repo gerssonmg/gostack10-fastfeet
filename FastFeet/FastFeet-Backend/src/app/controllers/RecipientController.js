@@ -40,6 +40,36 @@ class RecipientController {
       cidade,
     });
   }
+
+  async update(req, res) {
+    if (!(await UserController.indexAdmin(req, res))) {
+      return res.status(400).json({ error: 'User not Admin' });
+    }
+
+    const recipient = await Recipient.findByPk(req.params.id);
+    if (!recipient) {
+      return res.status(400).json({ error: 'Id not found.' });
+    }
+
+    const {
+      id,
+      name,
+      bairro,
+      rua,
+      numero,
+      estado,
+      cidade,
+    } = await recipient.update(req.body);
+    return res.json({
+      id,
+      name,
+      bairro,
+      rua,
+      numero,
+      estado,
+      cidade,
+    });
+  }
 }
 
 export default new RecipientController();
