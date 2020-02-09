@@ -53,9 +53,3 @@ module.exports = {
     return queryInterface.dropTable('recipients');
   },
 };
-
-// nome do destinatário
-// e campos de endereço:
-// rua, número,
-// complemento,
-// estado, cidade e CEP.
