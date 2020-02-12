@@ -3,96 +3,78 @@ import Deliveryman from '../models/Deliveryman';
 
 class DeliverymanController {
   async index(req, res) {
-    return res.json('OK');
-    // Atributt adicionado pelo middlewares/auth.js caso o token seja valido
-    // const { userId } = req;
-    // const user = await User.findByPk(userId);
-    // return user.email === 'admin@fastfeet.com';
+    return res.json(await Deliveryman.findAll());
   }
 
   async store(req, res) {
-    return res.json('OK');
-    /*
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string()
         .email()
         .required(),
-      password: Yup.string()
-        .required()
-        .min(6),
+      avatar_id: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validataion fails' });
     }
 
-    const userExists = await User.findOne({
+    const deliverymanExists = await Deliveryman.findOne({
       where: {
         email: req.body.email,
       },
     });
 
-    if (userExists) {
-      return res.status(400).json({ error: 'User already exists.' });
+    if (deliverymanExists) {
+      return res.status(400).json({ error: 'Deliveryman already exists.' });
     }
-    const { id, name, email, provider } = await User.create(req.body);
+    const { id, name, email, avatar_id } = await Deliveryman.create(req.body);
     return res.json({
       id,
       name,
       email,
-      provider,
+      avatar_id,
     });
-    */
   }
 
   async update(req, res) {
-    return res.json('OK');
-    /*
-    const { email, oldPassword } = req.body;
-    const user = await User.findByPk(req.userId);
+    const deliveryman = await Deliveryman.findByPk(req.params.id);
+    const { email } = req.body;
 
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
-      oldPassword: Yup.string().min(6),
-      password: Yup.string()
-        .min(6)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
-        ),
-      confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
-      ),
+      avatar_id: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    if (email && email !== user.email) {
-      const userExists = await User.findOne({ where: { email } });
-      if (userExists) {
-        return res.status(400).json({ error: 'User already exists.' });
+    if (email && email !== deliveryman.email) {
+      const deliverymanExists = await Deliveryman.findOne({ where: { email } });
+      if (deliverymanExists) {
+        return res
+          .status(400)
+          .json({ error: 'Deliveryman Exists already exists.' });
       }
     }
 
-    if (oldPassword && !(await user.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'Password does not match' });
-    }
-
-    const { id, name, provider } = await user.update(req.body);
+    const { id, name, avatar_id } = await deliveryman.update(req.body);
     return res.json({
       id,
       name,
       email,
-      provider,
+      avatar_id,
     });
-    */
   }
 
   async delete(req, res) {
-    return res.json('OK');
+    const d = await Deliveryman.destroy({
+      where: { id: req.params.id },
+    });
+
+    return res.json(d);
   }
 }
 
