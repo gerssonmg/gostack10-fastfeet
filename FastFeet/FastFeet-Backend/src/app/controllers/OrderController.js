@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import Order from '../models/Order';
+import Delivery from '../models/Delivery';
 
-class OrderController {
+class DeliveryController {
   async index(req, res) {
     try {
       return res.json(
@@ -9,8 +9,8 @@ class OrderController {
           attributes: ['id', 'product'],
         })
       );
-    } catch (err) {
-      return res.status(400).json({ error: err });
+    } catch (error) {
+      return res.status(400).json({ error: `${error}` });
     }
   }
 
@@ -23,8 +23,8 @@ class OrderController {
 
     try {
       await schema.validate(req.body);
-    } catch (err) {
-      return res.status(400).json({ error: `Validation fails: ${err}` });
+    } catch (error) {
+      return res.status(400).json({ error: `Validation fails: ${error}` });
     }
 
     try {
@@ -38,46 +38,40 @@ class OrderController {
   }
 
   async update(req, res) {
-    return res.json('UPDATE OK');
-    const deliveryman = await Order.findByPk(req.params.id);
-    const { email } = req.body;
+    let order;
+    try {
+      order = await Order.findByPk(req.params.id);
+    } catch (error) {
+      return res.status(400).json({ error: `not found order: ${error}` });
+    }
 
     const schema = Yup.object().shape({
-      name: Yup.string(),
-      email: Yup.string().email(),
-      avatar_id: Yup.string(),
+      product: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
-
-    if (email && email !== deliveryman.email) {
-      const deliverymanExists = await Order.findOne({ where: { email } });
-      if (deliverymanExists) {
-        return res
-          .status(400)
-          .json({ error: 'Deliveryman Exists already exists.' });
-      }
+    try {
+      const orderUpdate = await order.update(req.body);
+      return res.json({
+        orderUpdate,
+      });
+    } catch (error) {
+      return res.status(400).json({ error: `Error Update:${error}` });
     }
-
-    const { id, name, avatar_id } = await deliveryman.update(req.body);
-    return res.json({
-      id,
-      name,
-      email,
-      avatar_id,
-    });
   }
 
   async delete(req, res) {
-    return res.json('DELETE OK');
-    const d = await Order.destroy({
-      where: { id: req.params.id },
-    });
-
-    return res.json(d);
+    try {
+      const orderDelete = await Order.destroy({
+        where: { id: req.params.id },
+      });
+      return res.json(orderDelete);
+    } catch (error) {
+      return res.status(400).json({ error: `Error Delete:${error}` });
+    }
   }
 }
 
-export default new OrderController();
+export default new DeliveryController();
