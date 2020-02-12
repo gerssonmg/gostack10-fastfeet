@@ -77,7 +77,7 @@ class UserController {
     });
   }
 
-  async indexAdmin(req, res) {
+  async indexAdmin(req) {
     // Atributt adicionado pelo middlewares/auth.js caso o token seja valido
     const { userId } = req;
     const user = await User.findByPk(userId);
