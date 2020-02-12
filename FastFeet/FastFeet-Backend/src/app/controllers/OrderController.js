@@ -5,7 +5,7 @@ class DeliveryController {
   async index(req, res) {
     try {
       return res.json(
-        await Order.findAll({
+        await Delivery.findAll({
           attributes: ['id', 'product'],
         })
       );
@@ -28,9 +28,9 @@ class DeliveryController {
     }
 
     try {
-      const orderOK = await Order.create(req.body);
+      const deliveryOK = await Delivery.create(req.body);
       return res.json({
-        orderOK,
+        deliveryOK,
       });
     } catch (err) {
       return res.status(400).json({ error: `Create fails: ${err}` });
@@ -38,11 +38,11 @@ class DeliveryController {
   }
 
   async update(req, res) {
-    let order;
+    let delivery;
     try {
-      order = await Order.findByPk(req.params.id);
+      delivery = await Delivery.findByPk(req.params.id);
     } catch (error) {
-      return res.status(400).json({ error: `not found order: ${error}` });
+      return res.status(400).json({ error: `not found delivery: ${error}` });
     }
 
     const schema = Yup.object().shape({
@@ -53,9 +53,9 @@ class DeliveryController {
       return res.status(400).json({ error: 'Validation fails' });
     }
     try {
-      const orderUpdate = await order.update(req.body);
+      const deliveryUpdate = await delivery.update(req.body);
       return res.json({
-        orderUpdate,
+        deliveryUpdate,
       });
     } catch (error) {
       return res.status(400).json({ error: `Error Update:${error}` });
@@ -64,10 +64,10 @@ class DeliveryController {
 
   async delete(req, res) {
     try {
-      const orderDelete = await Order.destroy({
+      const deliveryDelete = await Delivery.destroy({
         where: { id: req.params.id },
       });
-      return res.json(orderDelete);
+      return res.json(deliveryDelete);
     } catch (error) {
       return res.status(400).json({ error: `Error Delete:${error}` });
     }
