@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { startOfHour, setHours, isAfter, isBefore } from 'date-fns';
 import Delivery from '../models/Delivery';
 
 class DeliveryController {
@@ -28,6 +29,8 @@ class DeliveryController {
     }
 
     try {
+      // const payload = req.body;
+      // payload.start_date = new Date();
       const deliveryOK = await Delivery.create(req.body);
       return res.json({
         deliveryOK,
@@ -52,6 +55,102 @@ class DeliveryController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
+
+    const endpoint = req.url.split('/');
+    if (endpoint[endpoint.length - 1] === 'status') {
+      const { canceled_at, start, end } = req.body;
+
+      if ((canceled_at && end) || (start && end) || (start && canceled_at)) {
+        return res.status(400).json({
+          error:
+            'Just one attribute, it can be true. canceled_at or end or start ',
+        });
+      }
+      if (start) {
+        const data_now = new Date();
+
+        const data_now_hours_clean = startOfHour(data_now);
+
+        const hoursBeginDay = setHours(data_now_hours_clean, 8);
+
+        const hoursEndDay = setHours(data_now_hours_clean, 18);
+
+        if (
+          isBefore(hoursBeginDay, data_now) &&
+          isAfter(hoursEndDay, data_now)
+        ) {
+          try {
+            delivery.start_date = data_now;
+            const ret = await Delivery.update(
+              {
+                start_date: new Date(),
+              },
+              {
+                where: {
+                  id: req.params.id,
+                },
+                returning: true,
+              }
+            );
+            return res.json({
+              ret,
+            });
+          } catch (error) {
+            return res
+              .status(400)
+              .json({ error: `Error.. Update:     ${error}` });
+          }
+        } else {
+          return res.status(400).json({
+            error: `Not range time valid.Is 08:00:00 of 18:00:00`,
+          });
+        }
+      } else if (end) {
+        try {
+          const ret = await Delivery.update(
+            {
+              start_date: new Date(),
+            },
+            {
+              where: {
+                id: req.params.id,
+              },
+            }
+          );
+          return res.json({
+            ret,
+          });
+        } catch (error) {
+          return res
+            .status(400)
+            .json({ error: `Error.. Update:     ${error}` });
+        }
+      } else if (canceled_at) {
+        try {
+          const ret = await Delivery.update(
+            {
+              canceled_at: new Date(),
+            },
+            {
+              where: {
+                id: req.params.id,
+              },
+            },
+            {
+              new: true,
+            }
+          );
+          return res.json({
+            ret,
+          });
+        } catch (error) {
+          return res
+            .status(400)
+            .json({ error: `Error.. Update:     ${error}` });
+        }
+      }
+    }
+
     try {
       const deliveryUpdate = await delivery.update(req.body);
       return res.json({

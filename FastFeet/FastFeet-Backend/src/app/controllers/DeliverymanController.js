@@ -1,9 +1,39 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Deliveryman from '../models/Deliveryman';
+import Delivery from '../models/Delivery';
 
 class DeliverymanController {
   async index(req, res) {
-    return res.json(await Deliveryman.findAll());
+    return res.json(
+      await Delivery.findAll({
+        where: {
+          deliveryman_id: req.params.id,
+          end_date: {
+            [Op.is]: null,
+          },
+        },
+        attributes: ['id', 'product', 'canceled_at'],
+      })
+    );
+  }
+
+  async show(req, res) {
+    try {
+      return res.json(
+        await Delivery.findAll({
+          where: {
+            deliveryman_id: req.params.id,
+            end_date: {
+              [Op.not]: null,
+            },
+          },
+          attributes: ['id', 'product', 'recipient_id', 'end_date'],
+        })
+      );
+    } catch (error) {
+      return res.status(400).json({ error: `Erro show:${error}` });
+    }
   }
 
   async store(req, res) {

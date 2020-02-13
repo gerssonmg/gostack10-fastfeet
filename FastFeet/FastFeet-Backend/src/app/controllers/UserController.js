@@ -2,6 +2,20 @@ import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
+  // Atributt adicionado pelo middlewares/auth.js caso o token seja valido
+  /**
+   *
+   * @param {*} req
+   */
+  async index(req) {
+    const { userId } = req;
+    const user = await User.findByPk(userId);
+    return user.email === 'admin@fastfeet.com';
+  }
+
+  /**
+   * No momento não esta sendo utilizado
+   */
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -35,6 +49,9 @@ class UserController {
     });
   }
 
+  /**
+   * No momento não esta sendo utilizado
+   */
   async update(req, res) {
     const { email, oldPassword } = req.body;
     const user = await User.findByPk(req.userId);
@@ -75,13 +92,6 @@ class UserController {
       email,
       provider,
     });
-  }
-
-  async indexAdmin(req) {
-    // Atributt adicionado pelo middlewares/auth.js caso o token seja valido
-    const { userId } = req;
-    const user = await User.findByPk(userId);
-    return user.email === 'admin@fastfeet.com';
   }
 }
 

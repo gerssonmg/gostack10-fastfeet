@@ -4,7 +4,7 @@ import UserController from './UserController';
 
 class RecipientController {
   async store(req, res) {
-    if (!(await UserController.indexAdmin(req, res))) {
+    if (!(await UserController.index(req, res))) {
       return res.status(400).json({ error: 'User not Admin' });
     }
 
@@ -50,7 +50,7 @@ class RecipientController {
   }
 
   async update(req, res) {
-    if (!(await UserController.indexAdmin(req, res))) {
+    if (!(await UserController.index(req, res))) {
       return res.status(400).json({ error: 'User not Admin' });
     }
 
