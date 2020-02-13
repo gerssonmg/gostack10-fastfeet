@@ -1,13 +1,18 @@
 import * as Yup from 'yup';
 import { startOfHour, setHours, isAfter, isBefore } from 'date-fns';
+import Queue from '../../lib/Queue';
+
+import CancellationMain from '../jobs/CancellationMail';
 import Delivery from '../models/Delivery';
+import Recipient from '../models/Recipient';
+import Deliveryman from '../models/Deliveryman';
 
 class DeliveryController {
   async index(req, res) {
     try {
       return res.json(
         await Delivery.findAll({
-          attributes: ['id', 'product'],
+          // attributes: ['id', 'product'],
         })
       );
     } catch (error) {
@@ -32,8 +37,43 @@ class DeliveryController {
       // const payload = req.body;
       // payload.start_date = new Date();
       const deliveryOK = await Delivery.create(req.body);
+
+      const delivery = await Delivery.findAll({
+        where: {
+          id: deliveryOK.id,
+        },
+        attributes: ['product'],
+        include: [
+          {
+            model: Recipient,
+            as: 'recipient',
+            attributes: [
+              'name',
+              'district',
+              'street',
+              'number',
+              'complement',
+              'state',
+              'city',
+              'zipcode',
+            ],
+          },
+          {
+            model: Deliveryman,
+            as: 'deliveryman',
+            attributes: ['name', 'email'],
+          },
+        ],
+      });
+
+      await Queue.add(CancellationMain.key, {
+        delivery,
+      });
+
       return res.json({
-        deliveryOK,
+        delivery: {
+          id: deliveryOK.id,
+        },
       });
     } catch (err) {
       return res.status(400).json({ error: `Create fails: ${err}` });
