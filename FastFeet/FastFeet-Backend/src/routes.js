@@ -24,6 +24,9 @@ routes.post('/sessions', SessionController.store);
  *
  */
 routes.post('/delivery/:id/problems', DeliveryProblemController.store);
+routes.get('/delivery/:id/problems', DeliveryProblemController.index);
+routes.delete('/problem/:id/cancel-delivery', DeliveryProblemController.update);
+routes.get('/delivery/problems', DeliveryProblemController.show);
 
 /**
  *
