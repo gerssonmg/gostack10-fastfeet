@@ -6,6 +6,7 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import RecipientController from './app/controllers/RecipientController';
 import SessionController from './app/controllers/SessionController';
 import DeliveryController from './app/controllers/DeliveryController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 import AuthMiddleware from './app/middlewares/auth';
 
@@ -18,6 +19,28 @@ const upload = multer(multerConfig);
  * Cria sessão de autenticação JWT
  */
 routes.post('/sessions', SessionController.store);
+
+/**
+ *
+ */
+routes.post('/delivery/:id/problems', DeliveryProblemController.store);
+
+/**
+ *
+ */
+routes.put('/delivery/:id/status', DeliveryController.update);
+
+/**
+ * Lista encomendas não entregues ou canceladas
+ * end_date === null
+ */
+routes.get('/deliveryman/:id', DeliverymanController.index);
+
+/**
+ * Lista encomendas entregues
+ * end_date !== null
+ */
+routes.get('/deliveryman/:id/deliveries', DeliverymanController.show);
 
 /**
  * Valida token JWT de autenticação
@@ -33,18 +56,6 @@ routes.post('/recipients', RecipientController.store);
  * Atualiza fornecedor
  */
 routes.put('/recipients/:id', RecipientController.update);
-
-/**
- * Lista encomendas não entregues ou canceladas
- * end_date === null
- */
-routes.get('/deliveryman/:id', DeliverymanController.index);
-
-/**
- * Lista encomendas entregues
- * end_date !== null
- */
-routes.get('/deliveryman/:id/deliveries', DeliverymanController.show);
 
 /**
  * Cadastra entregador
@@ -64,7 +75,6 @@ routes.delete('/deliveryman/:id', DeliverymanController.delete);
 routes.get('/delivery', DeliveryController.index);
 routes.post('/delivery', DeliveryController.store);
 routes.put('/delivery/:id', DeliveryController.update);
-routes.put('/delivery/:id/start', DeliveryController.update);
 routes.delete('/delivery/:id', DeliveryController.delete);
 
 routes.post(
