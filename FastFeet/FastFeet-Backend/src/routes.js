@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import multer from 'multer';
+import multerConfig from './config/multer';
 
 import DeliverymanController from './app/controllers/DeliverymanController';
 import RecipientController from './app/controllers/RecipientController';
@@ -7,8 +9,11 @@ import DeliveryController from './app/controllers/DeliveryController';
 
 import AuthMiddleware from './app/middlewares/auth';
 
-const routes = new Router();
+import FileDeliverymanController from './app/controllers/FileDeliverymanController';
+import FileSignatureController from './app/controllers/FileSignatureController';
 
+const routes = new Router();
+const upload = multer(multerConfig);
 /**
  * Cria sessão de autenticação JWT
  */
@@ -60,8 +65,17 @@ routes.get('/delivery', DeliveryController.index);
 routes.post('/delivery', DeliveryController.store);
 routes.put('/delivery/:id', DeliveryController.update);
 routes.put('/delivery/:id/start', DeliveryController.update);
-routes.put('/delivery/:id/end', DeliveryController.update);
-routes.put('/delivery/:id/status', DeliveryController.update);
 routes.delete('/delivery/:id', DeliveryController.delete);
+
+routes.post(
+  '/files/deliveryman/:id',
+  upload.single('file'),
+  FileDeliverymanController.store
+);
+routes.post(
+  '/files/signature/:id',
+  upload.single('file'),
+  FileSignatureController.store
+);
 
 export default routes;
