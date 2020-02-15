@@ -8,6 +8,13 @@ import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 
 class DeliveryController {
+  /**
+   * pt: Retornar todas as encomendas
+   *
+   * en: Return all deliveries
+   * @param {*} req
+   * @param {*} res
+   */
   async index(req, res) {
     try {
       return res.json(
@@ -213,4 +220,8 @@ class DeliveryController {
   }
 }
 
+/**
+ * Controller responsavel por manipular
+ * as encomendas
+ */
 export default new DeliveryController();
