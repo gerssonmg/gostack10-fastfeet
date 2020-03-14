@@ -6,6 +6,7 @@ import RouteCustomComponent from './Route';
 import Login from '../pages/Login';
 import Encomendas from '../pages/Encomendas';
 import Entregadores from '../pages/Entregadores';
+import CadastroEntregadores from '../pages/CadastroEntregadores';
 import Destinatarios from '../pages/Destinatarios';
 import Problemas from '../pages/Problemas';
 
@@ -23,6 +24,12 @@ export default function Routes() {
         path="/entregadores"
         exact
         component={Entregadores}
+        login={false}
+      />
+      <RouteCustomComponent
+        path="/cadastro/entregadores"
+        exact
+        component={CadastroEntregadores}
         login={false}
       />
       <RouteCustomComponent

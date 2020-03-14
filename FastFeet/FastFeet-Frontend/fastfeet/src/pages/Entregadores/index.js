@@ -1,17 +1,76 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { Link } from 'react-router-dom';
+import { Container, PageHeader, PageOptions, ProductTable } from './styles';
+
+import TitlePage from '../../components/TitlePage';
+import InputPage from '../../components/InputPage';
+import BottomPage from '../../components/BottomPage';
 
 export default function Entregadores() {
   return (
     <Container>
-      <ul>
-        <li>Entre</li>
-        <li>Entre</li>
-        <li>Entre</li>
-        <li>Entre</li>
-        <li>Entre</li>
-      </ul>
+      <PageHeader>
+        <TitlePage title="Gerenciando entregadores" />
+        <PageOptions>
+          <InputPage search="Buscar por entregadores" />
+          <BottomPage>
+            <Link to="/cadastro/entregadores" />
+          </BottomPage>
+        </PageOptions>
+      </PageHeader>
+      <ProductTable>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#01</td>
+            <td>JD</td>
+            <td>John Doe</td>
+            <td>example@rocketseat.com</td>
+            <td>:</td>
+          </tr>
+
+          <tr>
+            <td>#01</td>
+            <td>JD</td>
+            <td>John Doe</td>
+            <td>example@rocketseat.com</td>
+            <td>:</td>
+          </tr>
+
+          <tr>
+            <td>#01</td>
+            <td>JD</td>
+            <td>John Doe</td>
+            <td>example@rocketseat.com</td>
+            <td>:</td>
+          </tr>
+
+          <tr>
+            <td>#01</td>
+            <td>JD</td>
+            <td>John Doe</td>
+            <td>example@rocketseat.com</td>
+            <td>:</td>
+          </tr>
+
+          <tr>
+            <td>#01</td>
+            <td>JD</td>
+            <td>John Doe</td>
+            <td>example@rocketseat.com</td>
+            <td>:</td>
+          </tr>
+        </tbody>
+      </ProductTable>
     </Container>
   );
 }

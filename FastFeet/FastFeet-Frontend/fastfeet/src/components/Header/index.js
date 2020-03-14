@@ -8,7 +8,9 @@ export default function Header({ pagina }) {
   return (
     <Content>
       <nav>
-        <img src={logo} alt="GoBarber" />
+        <Link to="/encomendas">
+          <img src={logo} alt="GoBarber" />
+        </Link>
         <Link to="/encomendas">ENCOMENDAS</Link>
         <Link to="/entregadores">ENTREGADORES</Link>
         <Link to="/destinatarios">DESTINATARIOS</Link>

@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Container } from './styles';
 
-export default function TitlePage() {
+export default function TitlePage({ title }) {
   return (
     <Container>
-      <h1>Gerenciando encomendas</h1>
+      <h1>{title}</h1>
     </Container>
   );
 }

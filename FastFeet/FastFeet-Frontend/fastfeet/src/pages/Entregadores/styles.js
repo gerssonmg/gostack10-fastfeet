@@ -1,8 +1,42 @@
 import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
+export const PageHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PageOptions = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ProductTable = styled.table`
+  width: 100%;
+  margin-top: 20px;
+  border-spacing: 0 10px;
+
+  thead th {
+    color: #000;
+
+    text-align: center;
+    padding: 1px;
+  }
+  tbody {
+    margin-top: 50px;
+
+    tr {
+      background: #fff;
+      td {
+        padding: 15px;
+        text-align: center;
+      }
+    }
+  }
+`;
+
 export const Container = styled.div`
-  max-width: 600px;
+  max-width: 900px;
   margin: 50px auto;
   min-height: 100px;
   display: flex;

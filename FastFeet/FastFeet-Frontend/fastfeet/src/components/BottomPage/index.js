@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 import { Container } from './styles';
 
-export default function BottomPage() {
+export default function BottomPage({ name }) {
   return (
     <Container>
-      <MdAdd />
-      <p>CADASTRAR</p>
+      {name === 'VOLTAR' ? <MdChevronLeft /> : <MdAdd />}
+      <p>{name || 'CADASTRAR'}</p>
     </Container>
   );
 }

@@ -10,9 +10,9 @@ export default function Encomendas() {
   return (
     <Container>
       <PageHeader>
-        <TitlePage />
+        <TitlePage title="Gerenciando encomendas" />
         <PageOptions>
-          <InputPage />
+          <InputPage search="Buscar por encomenda" />
           <BottomPage />
         </PageOptions>
       </PageHeader>
