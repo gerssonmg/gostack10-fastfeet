@@ -2,7 +2,7 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
-import './config/ReactotronConfig';
+// import './config/ReactotronConfig';
 
 // import Login from './pages/Login';
 // import Encomendas from './pages/Encomendas';
@@ -15,7 +15,7 @@ import RouterCustom from './routes';
 import GlobalStyle from './styles/global';
 
 function App() {
-  console.tron.log('APP');
+  // console.tron.log('APP');
   return (
     <BrowserRouter>
       {/*

@@ -1,65 +1,94 @@
 import styled from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
-export const Container = styled.div`
-  background: #fff;
-  padding: 0 30px;
+export const PageHeader = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-export const Content = styled.div`
-  height: 64px;
-  max-width: 900px;
-  margin: 0 auto;
+export const PageOptions = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+`;
 
-  nav {
-    display: flex;
-    align-items: center;
+export const ProductTable = styled.table`
+  width: 100%;
+  margin-top: 20px;
+  border-spacing: 0 10px;
 
-    img {
-      margin-right: 20px;
-      padding-right: 20px;
-      border-right: 1px solid #eee;
-    }
+  thead th {
+    color: #000;
 
-    a {
-      font-weight: bold;
-      color: #7159c1;
-    }
+    text-align: center;
+    padding: 1px;
   }
-  aside {
-    display: flex;
-    align-items: center;
+  tbody {
+    margin-top: 50px;
+
+    tr {
+      background: #fff;
+      td {
+        padding: 15px;
+        text-align: center;
+      }
+    }
   }
 `;
 
-export const Profile = styled.div`
+export const Container = styled.div`
+  max-width: 900px;
+  margin: 50px auto;
+  min-height: 100px;
   display: flex;
-  margin-left: 20px;
-  padding-left: 20px;
-  border-left: 1px solid #eee;
+  flex-direction: column;
 
-  div {
-    text-align: right;
-    margin-right: 10px;
+  header {
+    display: flex;
+    align-self: center;
+    align-items: center;
+
+    button {
+      border: 0;
+      background: none;
+    }
 
     strong {
-      display: block;
-      color: #333;
-    }
-
-    a {
-      display: block;
-      margin-top: 2px;
-      font-size: 12px;
-      color: #999;
+      color: #fff;
+      font-size: 24px;
+      margin: 0 15px;
     }
   }
 
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+    margin-top: 30px;
   }
+`;
+
+export const Time = styled.li`
+  padding: 20px;
+  border-radius: 4px;
+  background: #fff;
+
+  opacity: ${props => (props.past ? 0.6 : 1)};
+
+  strong {
+    display: block;
+    color: ${props => (props.available ? '#999' : '#7159c1')};
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  span {
+    display: block;
+    margin-top: 3px;
+    color: ${props => (props.available ? '#999' : '#666')};
+  }
+`;
+
+export const Scroll = styled(PerfectScrollbar)`
+  max-height: 460px;
+  padding: 5px 15px;
 `;

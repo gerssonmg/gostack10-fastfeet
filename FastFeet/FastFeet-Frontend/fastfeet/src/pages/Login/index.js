@@ -19,15 +19,14 @@ export default function Login() {
       <img src={logo} alt="GoBarber" />
 
       <Form schema={schema}>
-        <Input name="email" type="email" placeholder="Seu e-mail" />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Sua senha secreta"
-        />
+        <p>SEU E-MAIL</p>
+        <Input name="email" type="email" placeholder="exemplo@email.com" />
 
-        <button type="submit">Login</button>
-        <Link to="/encomendas">Criar Conta Gratuita</Link>
+        <p>SUA SENHA</p>
+        <Input name="password" type="password" placeholder="*************" />
+
+        <button type="submit">Entrar no sistema</button>
+        <Link to="/encomendas">Entrar no sistema</Link>
       </Form>
     </>
   );

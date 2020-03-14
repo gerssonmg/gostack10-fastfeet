@@ -11,10 +11,10 @@ export default function RouteWrapper({
   // isPrivate,
   ...rest
 }) {
-  console.tron.log('RouteWrapper');
+  /* console.tron.log('RouteWrapper');
   console.tron.log(Component);
   console.tron.log(`props_login:${login}`);
-  console.tron.log(rest);
+  console.tron.log(rest); */
   /*  const { signed } = store.getState().auth;
 
   if (!signed && isPrivate) {

@@ -10,7 +10,7 @@ import Destinatarios from '../pages/Destinatarios';
 import Problemas from '../pages/Problemas';
 
 export default function Routes() {
-  console.tron.log('ROUTES');
+  // console.tron.log('ROUTES');
   return (
     <Switch>
       <RouteCustomComponent
