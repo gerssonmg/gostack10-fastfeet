@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import { Container, PageHeader, PageOptions, ProductTable } from './styles';
 
 import TitlePage from '../../components/TitlePage';
@@ -13,7 +14,9 @@ export default function Destinatarios() {
         <TitlePage title="Gerenciando destinatários" />
         <PageOptions>
           <InputPage search="Buscar por destinatários" />
-          <BottomPage />
+          <Link to="/cadastro/entregadores">
+            <BottomPage />
+          </Link>
         </PageOptions>
       </PageHeader>
       <ProductTable>

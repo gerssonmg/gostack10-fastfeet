@@ -24,9 +24,9 @@ export default function Login() {
 
         <p>SUA SENHA</p>
         <Input name="password" type="password" placeholder="*************" />
-
-        <button type="submit">Entrar no sistema</button>
-        <Link to="/encomendas">Entrar no sistema</Link>
+        <Link to="/encomendas">
+          <button type="submit">Entrar no sistema</button>
+        </Link>
       </Form>
     </>
   );

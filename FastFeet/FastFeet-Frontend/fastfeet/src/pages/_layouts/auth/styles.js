@@ -61,9 +61,27 @@ export const Content = styled.div`
       margin-top: 15px;
       font-size: 16px;
       opacity: 0.8;
+      display: flex;
 
       &:hover {
         opacity: 1;
+      }
+
+      button {
+        flex: 1;
+        margin: 5px 0 0;
+        height: 44px;
+        background: #7d40e7;
+        font-weight: bold;
+        color: #fff;
+        border: 0;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: background 0.2s;
+
+        &:hover {
+          background: ${darken(0.03, '#3b9eff')};
+        }
       }
     }
   }

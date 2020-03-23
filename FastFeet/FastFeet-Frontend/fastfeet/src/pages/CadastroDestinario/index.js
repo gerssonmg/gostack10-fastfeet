@@ -18,7 +18,7 @@ const schema = Yup.object().shape({
     .required('O e-mail é obrigatório'),
   password: Yup.string().required('A senha é obrigatória'),
 });
-export default function CadastroDestinatario() {
+export default function Problemas() {
   return (
     <Container>
       <PageHeader>

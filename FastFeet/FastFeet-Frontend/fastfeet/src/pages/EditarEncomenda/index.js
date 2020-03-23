@@ -18,30 +18,40 @@ const schema = Yup.object().shape({
     .required('O e-mail é obrigatório'),
   password: Yup.string().required('A senha é obrigatória'),
 });
-export default function CadastroDestinatario() {
+export default function EditarEncomenda() {
   return (
     <Container>
       <PageHeader>
-        <TitlePage title="Cadastro de entregadores" />
+        <TitlePage title="Editar Encomenda" />
         <PageOptions>
           <BottomPage name="VOLTAR" />
           <BottomPage name="SALVAR" />
         </PageOptions>
       </PageHeader>
       <Content>
-        <div>
-          <nav>
-            <MdInsertPhoto />
-            <p>Adicionar foto</p>
-          </nav>
-        </div>
-
         <Form schema={schema}>
-          <p>Nome</p>
-          <Input name="text" type="text" placeholder="John Doe" />
-
-          <p>Email</p>
-          <Input name="email" type="email" placeholder="exemplo@email.com" />
+          <ul>
+            <li>
+              <div>
+                <p>Destinatario</p>
+                <Input
+                  name="destinatario"
+                  type="text"
+                  placeholder="Ludwing van Beethoven"
+                />
+              </div>
+              <div>
+                <p>Entregador</p>
+                <Input name="entregador" type="text" placeholder="John Doe" />
+              </div>
+            </li>
+            <li>
+              <div>
+                <p>Nome do produto</p>
+                <Input name="produto" type="text" placeholder="Yamaha SX7" />
+              </div>
+            </li>
+          </ul>
         </Form>
       </Content>
     </Container>

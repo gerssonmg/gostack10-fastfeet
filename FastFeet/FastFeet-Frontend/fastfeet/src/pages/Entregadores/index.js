@@ -14,9 +14,9 @@ export default function Entregadores() {
         <TitlePage title="Gerenciando entregadores" />
         <PageOptions>
           <InputPage search="Buscar por entregadores" />
-          <BottomPage>
-            <Link to="/cadastro/entregadores" />
-          </BottomPage>
+          <Link to="/cadastro/entregadores">
+            <BottomPage />
+          </Link>
         </PageOptions>
       </PageHeader>
       <ProductTable>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/fastfeet_logo.svg';
 import { Content, Profile } from './styles';
 
-export default function Header({ pagina }) {
+export default function Header(/* { pagina } */) {
   return (
     <Content>
       <nav>

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import { Container, PageHeader, PageOptions, ProductTable } from './styles';
 
 import TitlePage from '../../components/TitlePage';
 import InputPage from '../../components/InputPage';
 import BottomPage from '../../components/BottomPage';
+import Notification from '../../components/Notifications';
 
 export default function Encomendas() {
   return (
@@ -13,7 +15,9 @@ export default function Encomendas() {
         <TitlePage title="Gerenciando encomendas" />
         <PageOptions>
           <InputPage search="Buscar por encomenda" />
-          <BottomPage />
+          <Link to="/editar/encomenda">
+            <BottomPage />
+          </Link>
         </PageOptions>
       </PageHeader>
       <ProductTable>
@@ -36,7 +40,9 @@ export default function Encomendas() {
             <td>Rio do Sul</td>
             <td>Santa Catarina</td>
             <td>* Entregue</td>
-            <td>...</td>
+            <td>
+              <Notification />
+            </td>
           </tr>
 
           <tr>
@@ -46,7 +52,9 @@ export default function Encomendas() {
             <td>Rio do Sul</td>
             <td>Santa Catarina</td>
             <td>* Entregue</td>
-            <td>...</td>
+            <td>
+              <Notification />
+            </td>
           </tr>
 
           <tr>
@@ -56,7 +64,9 @@ export default function Encomendas() {
             <td>Rio do Sul</td>
             <td>Santa Catarina</td>
             <td>* Entregue</td>
-            <td>...</td>
+            <td>
+              <Notification />
+            </td>
           </tr>
 
           <tr>
@@ -66,7 +76,9 @@ export default function Encomendas() {
             <td>Rio do Sul</td>
             <td>Santa Catarina</td>
             <td>* Entregue</td>
-            <td>...</td>
+            <td>
+              <Notification />
+            </td>
           </tr>
 
           <tr>
@@ -76,7 +88,9 @@ export default function Encomendas() {
             <td>Rio do Sul</td>
             <td>Santa Catarina</td>
             <td>* Entregue</td>
-            <td>...</td>
+            <td>
+              <Notification />
+            </td>
           </tr>
         </tbody>
       </ProductTable>
